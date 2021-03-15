@@ -17,7 +17,7 @@
 <span id="cdbox_showbutton" onclick="show_cdbox()">
      CodeBox
 </span>
-<span id="box"><h1>CodeBox</h1>Type & see HTML code results in realtime.<br><br>And This is your Preview Screen.<br>If you type something on CodeBox, This Text will changed. <br><br>Press the <b>Hide</b> button located next to CodeBox to hide the CodeBox window.<br><br>We're using your cookie just for Saving your Last Session, So you can continue it anytime.</span>
+<span id="box"><h1>CodeBox</h1>Type & see HTML code results in realtime.<br><br>And This is your Preview Screen.<br>If you type something on CodeBox, This Text will changed. <br><br>Press the <b>Hide</b> button located next to CodeBox to hide the CodeBox window.</span>
 </body>
 <script>
 const codebox = document.getElementById('codebox');
@@ -27,15 +27,15 @@ const codebox = document.getElementById('codebox');
 document.getElementById('input').addEventListener('input', () => {
   // Write to Preview screen
   document.getElementById('box').innerHTML = document.getElementById('input').value
-  // Save to Cookie so User can Wriye it anytime
-  createCookie('lastsession', document.getElementById('input').value)
+  // Save as cache so User can Continue it anytime
+  localStorage.setItem('cache', document.getElementById('input').value)
 })
 
-// If there's a Cookie
-if (getCookie('lastsession').length > 0) {
+// If there's a cache
+if (localStorage.getItem('cache').length > 0) {
 // Restore it
-  document.getElementById('input').value = getCookie('lastsession');;
-  document.getElementById('box').innerHTML = getCookie('lastsession');;
+  document.getElementById('input').value = localStorage.getItem('cache');;
+  document.getElementById('box').innerHTML = localStorage.getItem('cache');;
 }
 
 // Hide CodeBox Window
@@ -50,36 +50,6 @@ codebox.style.display = 'block';
 document.getElementById('cdbox_showbutton').style.display = 'none';
 }
 
-
-// Cookie Handler
-
-function createCookie(name, value, days) {
-    var expires;
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toGMTString();
-    }
-    else {
-        expires = "";
-    }
-    document.cookie = name + "=" + value + expires + "; path=/";
-}
-
-function getCookie(c_name) {
-    if (document.cookie.length > 0) {
-        c_start = document.cookie.indexOf(c_name + "=");
-        if (c_start != -1) {
-            c_start = c_start + c_name.length + 1;
-            c_end = document.cookie.indexOf(";", c_start);
-            if (c_end == -1) {
-                c_end = document.cookie.length;
-            }
-            return unescape(document.cookie.substring(c_start, c_end));
-        }
-    }
-    return "";
-}
 </script>
 <style>
   #codebox {
