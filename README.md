@@ -2,6 +2,5 @@
 Type & see HTML code result in Realtime.
 
 ## Demo
-- https://codebox.yonle.ga
 - https://code-box.glitch.me
 - https://yonle.github.io/codebox
